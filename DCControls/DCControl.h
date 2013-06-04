@@ -18,6 +18,7 @@
 
 @interface DCControl : UIView
 {
+	BOOL mTracking;
 }
 
 @property (nonatomic, unsafe_unretained) id delegate;
@@ -36,6 +37,8 @@
 @property BOOL allowsGestures;							// default: YES
 
 - (id)initWithDelegate:(id)aDelegate;
+
+@property(nonatomic,readonly,getter=isTracking) BOOL tracking;
 
 /////////////////////
 // Drawing Methods //

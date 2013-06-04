@@ -12,6 +12,8 @@
 @synthesize labelFont, labelColor, labelOffset;
 @synthesize min, max, value;
 @synthesize displaysValue, allowsGestures;
+@synthesize tracking = mTracking;
+
 
 - (void)dealloc
 {
@@ -39,6 +41,7 @@
 
 		self.clipsToBounds = NO;
 		self.opaque = YES;
+		mTracking = NO;
 	}
 
 	return self;
@@ -57,6 +60,23 @@
 
 	[self setNeedsDisplay];
 }
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	mTracking = YES;
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	mTracking = NO;
+	
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	mTracking = NO;
+}
+
 
 #pragma mark -
 #pragma mark Helper Methods

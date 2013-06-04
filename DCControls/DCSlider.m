@@ -62,6 +62,8 @@
 		// set the handle offset to -1 so touchesmoved events are ignored
 		touchHandleOffset = -1;
 	}
+	
+	mTracking = YES;
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event

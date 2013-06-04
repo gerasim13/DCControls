@@ -86,6 +86,8 @@
 
 	// create the initial angle and initial transform
 	initialTransform = [self initialTransform];
+	
+	mTracking = YES;
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -113,6 +115,7 @@
 		initialAngle = angleBetweenPoints(thisPoint, centerPoint);
 	}
 }
+
 
 #pragma mark -
 #pragma mark Helper Methods
