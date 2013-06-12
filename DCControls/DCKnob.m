@@ -34,6 +34,29 @@
 	return self;
 }
 
+
+- (id) initWithCoder:(NSCoder *)aDecoder
+{
+	if ((self = [super initWithCoder:aDecoder]))
+	{
+		self.arcStartAngle = 90.0;
+		self.cutoutSize = 60.0;
+		self.valueArcWidth = 15.0;
+		
+		// add the gesture recognizers for double & triple taps
+		UITapGestureRecognizer *doubleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTap:)];
+		doubleTapGesture.numberOfTapsRequired = 2;
+		[self addGestureRecognizer:doubleTapGesture];
+		
+		UITapGestureRecognizer *tripleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tripleTap:)];
+		tripleTapGesture.numberOfTapsRequired = 3;
+		[self addGestureRecognizer:tripleTapGesture];
+	}
+	
+	return self;
+}
+
+
 // overridden to make sure the frame is always square.
 - (void)setFrame:(CGRect)frame
 {

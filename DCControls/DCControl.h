@@ -20,8 +20,7 @@
 {
 	BOOL mTracking;
 }
-
-@property (nonatomic, unsafe_unretained) id delegate;
+@property  (nonatomic, unsafe_unretained) IBOutlet id delegate;
 @property (nonatomic, strong) UIColor *color;			// default: black
 @property CGFloat backgroundColorAlpha;					// default: 0.3
 

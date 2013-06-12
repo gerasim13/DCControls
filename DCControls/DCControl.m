@@ -47,6 +47,30 @@
 	return self;
 }
 
+- (id) initWithCoder:(NSCoder *)aDecoder
+{
+	if ((self = [super initWithCoder:aDecoder]))
+	{
+		self.delegate = nil;
+		
+		// setup defaults
+		self.backgroundColor = [UIColor blackColor];
+		self.backgroundColorAlpha = 0.3;
+		self.color = [UIColor blueColor];
+		self.min = 0.0;
+		self.max = 1.0;
+		self.displaysValue = YES;
+		self.allowsGestures = YES;
+		self.labelFont = [UIFont boldSystemFontOfSize:12.5];
+		
+		self.clipsToBounds = NO;
+		self.opaque = YES;
+		mTracking = NO;
+	}
+	
+	return self;
+}
+
 - (void)setValue:(float)newValue
 {
 	if (newValue > self.max)

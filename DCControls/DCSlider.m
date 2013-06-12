@@ -27,6 +27,21 @@
 	return self;
 }
 
+- (id) initWithCoder:(NSCoder *)aDecoder
+{
+	if ((self = [super initWithCoder:aDecoder]))
+	{
+		// add the double tap gesture for jumping the value straight to that point
+		UITapGestureRecognizer *doubleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTap:)];
+		doubleTapGesture.numberOfTapsRequired = 2;
+		[self addGestureRecognizer:doubleTapGesture];
+		
+		self.cornerRadius = 3.0;
+	}
+	
+	return self;
+}
+
 // to setup handle size
 - (void)setFrame:(CGRect)frame
 {
