@@ -11,10 +11,10 @@
 	CGFloat touchHandleOffset;
 }
 
-@property CGFloat handleSize;				// default: longest side / 6 (minimum of 35.0)
-@property CGFloat cornerRadius;				// default: 3.0
-@property BOOL isHorizontalSlider;			// default: NO
-@property BOOL biDirectional;				// default: NO
+@property (nonatomic, assign) CGFloat handleSize;				// default: longest side / 6 (minimum of 35.0)
+@property (nonatomic, assign) CGFloat cornerRadius;				// default: 3.0
+@property (nonatomic, assign) BOOL isHorizontalSlider;			// default: NO
+@property (nonatomic, assign) BOOL biDirectional;				// default: NO
 
 /////////////////////////
 // Init/Custom Setters //

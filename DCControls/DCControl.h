@@ -20,20 +20,20 @@
 {
 	BOOL mTracking;
 }
-@property  (nonatomic, unsafe_unretained) IBOutlet id delegate;
-@property (nonatomic, strong) UIColor *color;			// default: black
-@property CGFloat backgroundColorAlpha;					// default: 0.3
+@property (nonatomic, unsafe_unretained) IBOutlet id delegate;
+@property (nonatomic, strong) UIColor *color;	      		// default: black
+@property (nonatomic, assign) CGFloat backgroundColorAlpha; // default: 0.3
 
-@property (nonatomic, strong) UIFont *labelFont;		// default: bold, system, 12.5
+@property (nonatomic, strong) UIFont  *labelFont;		// default: bold, system, 12.5
 @property (nonatomic, strong) UIColor *labelColor;		// default: use self.color
-@property CGPoint labelOffset;							// default: CGPointZero
+@property (nonatomic, assign) CGPoint labelOffset;		// default: CGPointZero
 
-@property CGFloat min;									// default: 0.0
-@property CGFloat max;									// default: 1.0
-@property (nonatomic) CGFloat value;					// default: 0.0
+@property (nonatomic, assign) CGFloat min;				// default: 0.0
+@property (nonatomic, assign) CGFloat max;				// default: 1.0
+@property (nonatomic, assign) CGFloat value;			// default: 0.0
 
-@property BOOL displaysValue;							// default: YES
-@property BOOL allowsGestures;							// default: YES
+@property (nonatomic, assign) BOOL displaysValue;		// default: YES
+@property (nonatomic, assign) BOOL allowsGestures;		// default: YES
 
 - (id)initWithDelegate:(id)aDelegate;
 
