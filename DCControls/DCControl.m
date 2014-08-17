@@ -30,7 +30,7 @@
 		self.delegate = aDelegate;
 
 		// setup defaults
-		self.backgroundColor = [UIColor blackColor];
+		self.backgroundColor = [UIColor clearColor];
 		self.backgroundColorAlpha = 0.3;
 		self.color = [UIColor blueColor];
 		self.min = 0.0;
@@ -54,7 +54,7 @@
 		self.delegate = nil;
 		
 		// setup defaults
-		self.backgroundColor = [UIColor blackColor];
+		self.backgroundColor = [UIColor clearColor];
 		self.backgroundColorAlpha = 0.3;
 		self.color = [UIColor blueColor];
 		self.min = 0.0;
@@ -73,15 +73,16 @@
 
 - (void)setValue:(CGFloat)newValue
 {
-	if (newValue > self.max)
-		value = self.max;
-	else if (newValue < self.min)
-		value = self.min;
-	else
-		value = newValue;
+	if      (newValue > self.max) value = self.max;
+	else if (newValue < self.min) value = self.min;
+	else                          value = newValue;
+    
 	if (self.delegate)
-		[self.delegate controlValueDidChange:self.value sender:self];
-
+    {
+        [self.delegate controlValueDidChange:self.value sender:self];
+    }
+    
+    [self sendActionsForControlEvents:UIControlEventValueChanged];
 	[self setNeedsDisplay];
 }
 

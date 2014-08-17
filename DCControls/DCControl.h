@@ -16,7 +16,7 @@
 
 @end
 
-@interface DCControl : UIView
+@interface DCControl : UIControl
 {
 	BOOL mTracking;
 }
