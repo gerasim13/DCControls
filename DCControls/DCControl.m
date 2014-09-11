@@ -94,12 +94,13 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	mTracking = NO;
-	
+	[self sendActionsForControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	mTracking = NO;
+    [self sendActionsForControlEvents:UIControlEventTouchUpOutside];
 }
 
 
