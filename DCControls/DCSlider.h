@@ -15,6 +15,7 @@
 @property (nonatomic, assign) CGFloat cornerRadius;				// default: 3.0
 @property (nonatomic, assign) BOOL isHorizontalSlider;			// default: NO
 @property (nonatomic, assign) BOOL biDirectional;				// default: NO
+@property (nonatomic, assign) BOOL drawValueRect;               // default: YES
 
 /////////////////////////
 // Init/Custom Setters //

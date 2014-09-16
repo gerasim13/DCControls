@@ -7,7 +7,7 @@
 #import "DCSlider.h"
 
 @implementation DCSlider
-@synthesize handleSize, cornerRadius, isHorizontalSlider, biDirectional;
+@synthesize handleSize, cornerRadius, isHorizontalSlider, biDirectional, drawValueRect;
 
 #pragma mark -
 #pragma mark Init
@@ -22,6 +22,7 @@
 		[self addGestureRecognizer:doubleTapGesture];
 
 		self.cornerRadius = 3.0;
+        self.drawValueRect = YES;
 	}
 	
 	return self;
@@ -37,6 +38,7 @@
 		[self addGestureRecognizer:doubleTapGesture];
 		
 		self.cornerRadius = 3.0;
+        self.drawValueRect = YES;
 	}
 	
 	return self;
@@ -97,6 +99,7 @@
 		newValue = 1 - (touchPosition.y - touchHandleOffset) / (self.bounds.size.height - self.handleSize);
 
 	[self setValue:self.min + newValue * (self.max - self.min)];
+    [self sendActionsForControlEvents:UIControlEventValueChanged];
 }
 
 - (void)doubleTap:(UIGestureRecognizer *)gesture
@@ -114,6 +117,7 @@
 		newValue = 1 - (tapPoint.y - self.handleSize / 2) / (self.bounds.size.height - self.handleSize);
 	
 	[self setValue:self.min + newValue * (self.max - self.min)];
+    [self sendActionsForControlEvents:UIControlEventValueChanged];
 }
 
 #pragma mark -
@@ -146,21 +150,25 @@
 		CGFloat handlePos = CGRectGetMinX([self rectForHandle]);
 		CGFloat handleMid = CGRectGetMidX([self rectForHandle]);
 		CGFloat handleMax = CGRectGetMaxX([self rectForHandle]);
-		if (self.biDirectional)
-		{
-			if (self.value > (self.max - self.min) / 2)
-				valueRect = CGRectMake(self.bounds.size.width / 2.0, 0, handleMid - self.bounds.size.width / 2.0, self.bounds.size.height);
-			else
-				valueRect = CGRectMake(handleMid, 0, (self.bounds.size.width - handleMid - self.bounds.size.width / 2.0), self.bounds.size.height);
-			[self context:context addRoundedRect:valueRect cornerRadius:0];
-		}
-		else
-		{
-			valueRect = CGRectMake(0, 0, self.bounds.size.width - (self.bounds.size.width - handleMax), self.bounds.size.height);
-			[self context:context addRoundedRect:valueRect cornerRadius:self.cornerRadius];
-		}
-
-		CGContextFillPath(context);
+        
+        if (self.drawValueRect)
+        {
+            if (self.biDirectional)
+            {
+                if (self.value > (self.max - self.min) / 2)
+                    valueRect = CGRectMake(self.bounds.size.width / 2.0, 0, handleMid - self.bounds.size.width / 2.0, self.bounds.size.height);
+                else
+                    valueRect = CGRectMake(handleMid, 0, (self.bounds.size.width - handleMid - self.bounds.size.width / 2.0), self.bounds.size.height);
+                [self context:context addRoundedRect:valueRect cornerRadius:0];
+            }
+            else
+            {
+                valueRect = CGRectMake(0, 0, self.bounds.size.width - (self.bounds.size.width - handleMax), self.bounds.size.height);
+                [self context:context addRoundedRect:valueRect cornerRadius:self.cornerRadius];
+            }
+            
+            CGContextFillPath(context);
+        }
 
 		valueRect = CGRectMake(handlePos, 0, handleSize, self.bounds.size.height);
 	}
@@ -170,22 +178,26 @@
 		CGFloat handlePos = CGRectGetMinY([self rectForHandle]);
 		CGFloat handleMid = CGRectGetMidY([self rectForHandle]);
 		CGFloat handleMin = CGRectGetMinY([self rectForHandle]);
-		if (self.biDirectional)
-		{
-			if (self.value > (self.max - self.min) / 2)
-				valueRect = CGRectMake(0, handleMid, self.bounds.size.width, self.bounds.size.height / 2.0 - handleMid);
-			else
-				valueRect = CGRectMake(0, self.bounds.size.height / 2.0, self.bounds.size.width, handleMid - self.bounds.size.height / 2.0);
-			[self context:context addRoundedRect:valueRect cornerRadius:0];
-		}
-		else
-		{
-			valueRect = CGRectMake(0, handleMin, self.bounds.size.width, self.bounds.size.height - handleMin);
-			[self context:context addRoundedRect:valueRect cornerRadius:self.cornerRadius];
-		}
-
-		CGContextFillPath(context);
-
+        
+        if (self.drawValueRect)
+        {
+            if (self.biDirectional)
+            {
+                if (self.value > (self.max - self.min) / 2)
+                    valueRect = CGRectMake(0, handleMid, self.bounds.size.width, self.bounds.size.height / 2.0 - handleMid);
+                else
+                    valueRect = CGRectMake(0, self.bounds.size.height / 2.0, self.bounds.size.width, handleMid - self.bounds.size.height / 2.0);
+                [self context:context addRoundedRect:valueRect cornerRadius:0];
+            }
+            else
+            {
+                valueRect = CGRectMake(0, handleMin, self.bounds.size.width, self.bounds.size.height - handleMin);
+                [self context:context addRoundedRect:valueRect cornerRadius:self.cornerRadius];
+            }
+            
+            CGContextFillPath(context);
+        }
+        
 		valueRect = CGRectMake(0, handlePos, self.bounds.size.width, handleSize);
 	}
 

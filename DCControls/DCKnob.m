@@ -78,7 +78,7 @@
 {
 	if (self.allowsGestures)
 	{
-		[self performSelector:@selector(setValueFromGesture:) withObject:[NSNumber numberWithFloat:self.doubleTapValue] afterDelay:0.17];
+		[self performSelector:@selector(setValueFromGesture:) withObject:@(self.doubleTapValue) afterDelay:0.17];
 	}
 }
 
@@ -87,15 +87,16 @@
 	if (self.allowsGestures)
 	{
 		// cancel the double tap
-		[NSThread cancelPreviousPerformRequestsWithTarget:self selector:@selector(setValueFromGesture:) object:[NSNumber numberWithFloat:self.doubleTapValue]];
+		[NSThread cancelPreviousPerformRequestsWithTarget:self selector:@selector(setValueFromGesture:) object:@(self.doubleTapValue)];
 
-		[self performSelector:@selector(setValueFromGesture:) withObject:[NSNumber numberWithFloat:self.tripleTapValue]];
+		[self performSelector:@selector(setValueFromGesture:) withObject:@(self.tripleTapValue)];
 	}
 }
 
 - (void)setValueFromGesture:(NSNumber *)newValue
 {
 	self.value = [newValue floatValue];
+    [self sendActionsForControlEvents:UIControlEventValueChanged];
 }
 
 #pragma mark -
@@ -130,6 +131,7 @@
 	if (diff < (self.max - self.min) / 10.0)
 	{
 		self.value = newValue;
+        [self sendActionsForControlEvents:UIControlEventValueChanged];
 	}
 	else
 	{

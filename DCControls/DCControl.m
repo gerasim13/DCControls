@@ -82,13 +82,17 @@
         [self.delegate controlValueDidChange:self.value sender:self];
     }
     
-    [self sendActionsForControlEvents:UIControlEventValueChanged];
 	[self setNeedsDisplay];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	mTracking = YES;
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self sendActionsForControlEvents:UIControlEventValueChanged];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
